@@ -28,5 +28,9 @@ public class HUD {
 		Assets.setFontColor(Color.WHITE);
 		Assets.drawString(batch, "Energy:", 5, 25);
 	}
+	
+	public Color getHealthColor(){
+		return Color.RED;
+	}
 
 }

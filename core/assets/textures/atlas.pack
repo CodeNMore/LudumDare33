@@ -5,154 +5,175 @@ filter: Nearest,Nearest
 repeat: none
 cow
   rotate: false
-  xy: 0, 32
-  size: 32, 32
-  orig: 32, 32
+  xy: 0, 34
+  size: 32, 30
+  orig: 32, 30
   offset: 0, 0
   index: -1
 shuttle.1
   rotate: false
-  xy: 0, 16
+  xy: 0, 18
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
+  index: -1
+shuttle.2
+  rotate: false
+  xy: 32, 48
   size: 32, 16
   orig: 32, 16
   offset: 0, 0
   index: -1
 tallBuilding
   rotate: false
-  xy: 32, 0
+  xy: 64, 0
   size: 32, 64
   orig: 32, 64
   offset: 0, 0
   index: -1
+shuttle.overlay.1
+  rotate: false
+  xy: 0, 6
+  size: 26, 12
+  orig: 26, 12
+  offset: 0, 0
+  index: -1
+shuttle.overlay.2
+  rotate: false
+  xy: 32, 36
+  size: 26, 12
+  orig: 26, 12
+  offset: 0, 0
+  index: -1
 beam
   rotate: false
-  xy: 64, 63
+  xy: 96, 63
   size: 16, 1
   orig: 16, 1
   offset: 0, 0
   index: -1
 dirtTile
   rotate: false
-  xy: 0, 0
+  xy: 112, 48
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 grassTile
   rotate: false
-  xy: 16, 0
+  xy: 96, 47
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 grassTileFull
   rotate: false
-  xy: 64, 47
+  xy: 112, 32
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 rock
   rotate: false
-  xy: 80, 48
+  xy: 96, 31
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 rockTile
   rotate: false
-  xy: 64, 31
+  xy: 112, 16
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 human.left.1
   rotate: false
-  xy: 80, 38
+  xy: 58, 38
   size: 6, 10
   orig: 6, 10
   offset: 0, 0
   index: -1
 human.left.2
   rotate: false
-  xy: 96, 54
+  xy: 58, 28
   size: 6, 10
   orig: 6, 10
   offset: 0, 0
   index: -1
 human.left.3
   rotate: false
-  xy: 64, 21
+  xy: 26, 8
   size: 6, 10
   orig: 6, 10
   offset: 0, 0
   index: -1
 human.right.1
   rotate: false
-  xy: 86, 38
+  xy: 96, 21
   size: 6, 10
   orig: 6, 10
   offset: 0, 0
   index: -1
 human.right.2
   rotate: false
-  xy: 102, 54
+  xy: 32, 26
   size: 6, 10
   orig: 6, 10
   offset: 0, 0
   index: -1
 human.right.3
   rotate: false
-  xy: 64, 11
+  xy: 96, 11
   size: 6, 10
   orig: 6, 10
   offset: 0, 0
   index: -1
 human.shoot.1
   rotate: false
-  xy: 70, 21
+  xy: 102, 21
   size: 6, 10
   orig: 6, 10
   offset: 0, 0
   index: -1
 human.shoot.2
   rotate: false
-  xy: 108, 54
+  xy: 32, 16
   size: 6, 10
   orig: 6, 10
   offset: 0, 0
   index: -1
 human.stand.1
   rotate: false
-  xy: 64, 1
+  xy: 38, 26
   size: 6, 10
   orig: 6, 10
   offset: 0, 0
   index: -1
 human.stand.2
   rotate: false
-  xy: 70, 11
+  xy: 96, 1
   size: 6, 10
   orig: 6, 10
   offset: 0, 0
   index: -1
 gun.left
   rotate: false
-  xy: 80, 35
+  xy: 0, 3
   size: 3, 3
   orig: 3, 3
   offset: 0, 0
   index: -1
 gun.right
   rotate: false
-  xy: 96, 51
+  xy: 0, 0
   size: 3, 3
   orig: 3, 3
   offset: 0, 0
   index: -1
 color
   rotate: false
-  xy: 64, 0
+  xy: 96, 0
   size: 1, 1
   orig: 1, 1
   offset: 0, 0

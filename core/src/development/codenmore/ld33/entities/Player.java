@@ -1,8 +1,11 @@
 package development.codenmore.ld33.entities;
 
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import development.codenmore.ld33.Main;
 import development.codenmore.ld33.assets.Assets;
@@ -24,6 +27,10 @@ public class Player extends Entity {
 			rotateSpeedThreshhold = 2f;
 	private float rotation = 0.0f;
 	private TractorBeam beam;
+	//Overlay
+	private Animation overlayAnimation;
+	private TextureRegion overlayTexture = Assets.getRegion("shuttle.overlay.1");
+	private float animTimer = 0f;
 	//UI
 	private HUD hud;
 
@@ -31,10 +38,12 @@ public class Player extends Entity {
 		super(Main.WIDTH / 2 - 32, Main.HEIGHT - 64, 64, 32, Assets.getRegion("shuttle.1"));
 		beam = new TractorBeam(this);
 		hud = new HUD();
+		overlayAnimation = new Animation(0.04f, Assets.getSeries("shuttle.overlay.", 2));
+		overlayAnimation.setPlayMode(PlayMode.LOOP);
 		
 		movementComponent = new MovementComponent(180f);
 		addComponent(movementComponent);
-		animationComponent = new AnimationComponent(new Animation(0.1f, Assets.getSeries("shuttle.", 1)));
+		animationComponent = new AnimationComponent(new Animation(0.04f, Assets.getSeries("shuttle.", 2)));
 		addComponent(animationComponent);
 		collisionComponent = new CollisionComponent(this, 0, 0);
 		addComponent(collisionComponent);
@@ -45,6 +54,8 @@ public class Player extends Entity {
 		getInput();
 		setRotation();
 		super.tick(delta);
+		animTimer += delta;
+		overlayTexture = overlayAnimation.getKeyFrame(animTimer);
 		beam.tick(delta);
 		hud.tick(delta);
 	}
@@ -53,6 +64,10 @@ public class Player extends Entity {
 	public void render(SpriteBatch batch) {
 		batch.draw(getTexture(), x, y, width / 2, height / 2, width, height, 1,
 				1, -rotation);
+		batch.setColor(hud.getHealthColor());
+		batch.draw(overlayTexture, x + 6, y + 4, 26, 12, 52, 24, 1, 1, -rotation);
+		batch.setColor(Color.WHITE);
+		
 		beam.render(batch);
 		hud.render(batch);
 	}
