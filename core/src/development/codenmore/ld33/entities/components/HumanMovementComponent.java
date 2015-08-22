@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.MathUtils;
 import development.codenmore.ld33.Handler;
 import development.codenmore.ld33.Main;
 import development.codenmore.ld33.entities.Entity;
+import development.codenmore.ld33.entities.Player;
 import development.codenmore.ld33.entities.TractorBeam;
 
 public class HumanMovementComponent extends Component {
@@ -58,6 +59,13 @@ public class HumanMovementComponent extends Component {
 				walkRight = true;
 			}else if(e.getX() + e.getWidth() > Main.WIDTH - THRESH){
 				walkRight = false;
+			}else if(beam.isEmitting()){
+				Player p = Handler.getLevel().getEntityManager().getPlayer();
+				if(e.getX() < p.getX() + p.getWidth() / 2){
+					walkRight = false;
+				}else{
+					walkRight = true;
+				}
 			}
 			
 			if(walkRight){

@@ -73,6 +73,26 @@ public class Player extends Entity {
 			}
 		}
 		
+		if (InputManager.isKeyDown(Keys.S) || InputManager.isKeyDown(Keys.DOWN)) {
+			movementComponent.incY(-velocityIncrement);
+			if (movementComponent.getY() < -movementComponent.getSpeed())
+				movementComponent.setY(-movementComponent.getSpeed());
+		} else if (InputManager.isKeyDown(Keys.W) || InputManager.isKeyDown(Keys.UP)) {
+			movementComponent.incY(velocityIncrement);
+			if (movementComponent.getY() > movementComponent.getSpeed())
+				movementComponent.setY(movementComponent.getSpeed());
+		} else {
+			if (movementComponent.getY() > 0) {
+				movementComponent.incY(-velocityIncrement);
+				if (movementComponent.getY() < 0)
+					movementComponent.setY(0);
+			} else if (movementComponent.getY() < 0) {
+				movementComponent.incY(velocityIncrement);
+				if (movementComponent.getY() > 0)
+					movementComponent.setY(0);
+			}
+		}
+		
 		if(InputManager.isKeyDown(Keys.SPACE)){
 			beam.setEmit(true);
 		}else{
@@ -99,6 +119,23 @@ public class Player extends Entity {
 				if (rotation < 0)
 					rotation = 0;
 			}
+		}
+	}
+	
+	@Override
+	public void checkBounds(){
+		if(x < 0){
+			x = 0;
+			movementComponent.setX(0);
+		}else if(x + width > Main.WIDTH){
+			x = Main.WIDTH - width;
+			movementComponent.setX(0);
+		}else if(y + height > Main.HEIGHT){
+			y = Main.HEIGHT - height;
+			movementComponent.setY(0);
+		}else if(y < 350){
+			y = 350;
+			movementComponent.setY(0);
 		}
 	}
 

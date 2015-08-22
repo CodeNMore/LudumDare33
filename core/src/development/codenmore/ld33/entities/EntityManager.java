@@ -9,14 +9,14 @@ public class EntityManager {
 	private Player player;
 	//Entities
 	private Array<Entity> entities;
-	private Array<Integer> toRemove;
+	private Array<Entity> toRemove;
 	private Array<Bullet> bullets;
 	
 	public EntityManager(Player player){
 		this.player = player;
 		entities = new Array<Entity>();
-		toRemove = new Array<Integer>();
-		entities.add(player);
+		bullets = new Array<Bullet>();
+		toRemove = new Array<Entity>();
 	}
 	
 	public void tick(float delta){
@@ -25,23 +25,40 @@ public class EntityManager {
 			entity = entities.get(i);
 			entity.tick(delta);
 			if(entity.isRemove()){
-				toRemove.add(i);
+				toRemove.add(entity);
 			}
 		}
+		//Player
+		player.tick(delta);
 		//Remove entities
-		for(Integer i : toRemove){
-			entities.removeIndex(i);
+		for(Entity e : toRemove){
+			entities.removeValue(e, true);
 		}
 		toRemove.clear();
+		//Bullets
+		for(Bullet b : bullets){
+			if(b.tick(delta))
+				bullets.removeValue(b, true);
+		}
 	}
 	
 	public void render(SpriteBatch batch){
+		//Entities
 		for(Entity e : entities){
-			if(e.equals(player))
-				continue;
 			e.render(batch);
 		}
+		//Player
 		player.render(batch);
+		//Bullets
+		for(Bullet b : bullets){
+			b.render(batch);
+		}
+	}
+	
+	//BULLETS
+	
+	public void addBullet(Bullet b){
+		bullets.add(b);
 	}
 	
 	//ENTITIES

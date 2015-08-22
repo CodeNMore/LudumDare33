@@ -29,32 +29,22 @@ public class Level {
 		tiles = new byte[width * height];
 		genLevel();
 		
-		Entity e = new Entity(300, Tile.TILESIZE * 6 - 16, 12, 20, Assets.getRegion("human.stand.1"));
-		e.addComponent(new MovementComponent(60f));
-		e.addComponent(new CollisionComponent(e, 0, 0));
-		e.addComponent(new HumanMovementComponent());
-		e.addComponent(new HumanShooterComponent());
-		e.addComponent(new LiftComponent());
-		AnimationComponent a = new AnimationComponent();
-		a.setLeft(new Animation(0.2f, Assets.getSeries("human.left.", 3)));
-		a.setRight(new Animation(0.2f, Assets.getSeries("human.right.", 3)));
-		a.setStanding(new Animation(0.3f, Assets.getSeries("human.stand.", 2)));
-		a.setShooting(new Animation(0.1f, Assets.getSeries("human.shoot.", 2)));
-		e.addComponent(a);
-		entityManager.add(e);
-		
-		Entity e2 = new Entity(200, Tile.TILESIZE * 6 - 16, 12, 20, Assets.getRegion("human.stand.1"));
-		e2.addComponent(new MovementComponent(60f));
-		e2.addComponent(new CollisionComponent(e2, 0, 0));
-		e2.addComponent(new HumanMovementComponent());
-		e2.addComponent(new LiftComponent());
-		AnimationComponent a2 = new AnimationComponent();
-		a2.setLeft(new Animation(0.2f, Assets.getSeries("human.left.", 3)));
-		a2.setRight(new Animation(0.2f, Assets.getSeries("human.right.", 3)));
-		a2.setStanding(new Animation(0.3f, Assets.getSeries("human.stand.", 2)));
-		a2.setShooting(new Animation(0.1f, Assets.getSeries("human.shoot.", 2)));
-		e2.addComponent(a2);
-		entityManager.add(e2);
+		for(int i = 0;i < 40;++i){
+			Entity e = new Entity(300, Tile.TILESIZE * 6 - 16, 12, 20, Assets.getRegion("human.stand.1"));
+			e.addComponent(new MovementComponent(60f));
+			e.addComponent(new CollisionComponent(e, 0, 0));
+			e.addComponent(new HumanMovementComponent());
+			if(MathUtils.randomBoolean(0.1f))
+				e.addComponent(new HumanShooterComponent());
+			e.addComponent(new LiftComponent());
+			AnimationComponent a = new AnimationComponent();
+			a.setLeft(new Animation(0.2f, Assets.getSeries("human.left.", 3)));
+			a.setRight(new Animation(0.2f, Assets.getSeries("human.right.", 3)));
+			a.setStanding(new Animation(0.3f, Assets.getSeries("human.stand.", 2)));
+			a.setShooting(new Animation(0.1f, Assets.getSeries("human.shoot.", 2)));
+			e.addComponent(a);
+			entityManager.add(e);
+		}
 	}
 	
 	public void tick(float delta){
