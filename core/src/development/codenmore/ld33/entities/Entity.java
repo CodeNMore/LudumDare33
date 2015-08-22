@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 
+import development.codenmore.ld33.Main;
 import development.codenmore.ld33.entities.components.Component;
 
 public class Entity {
@@ -11,6 +12,7 @@ public class Entity {
 	//Basic entity info
 	protected float x, y;
 	protected int width, height;
+	private boolean remove = false;
 	private TextureRegion texture;
 	//Components
 	private Array<Component> components;
@@ -24,15 +26,33 @@ public class Entity {
 		components = new Array<Component>();
 	}
 	
+	public Entity(float x, float y){
+		this(x, y, 1, 1, null);
+	}
+	
+	public Entity(){
+		this(0, 0);
+	}
+	
 	public void tick(float delta){
 		for(int i = 0;i < components.size;++i){
 			components.get(i).tick(this, delta);
 		}
+		checkBounds();
 	}
 	
 	public void render(SpriteBatch batch){
 		if(texture != null)
 			batch.draw(texture, x, y, width, height);
+	}
+	
+	//BOUNDS
+	
+	protected void checkBounds(){
+		if(x < 0)
+			x = 0;
+		else if(x + width > Main.WIDTH)
+			x = Main.WIDTH - width;
 	}
 	
 	// COMPONENT METHODS
@@ -115,6 +135,14 @@ public class Entity {
 
 	public void setTexture(TextureRegion texture) {
 		this.texture = texture;
+	}
+
+	public boolean isRemove() {
+		return remove;
+	}
+
+	public void setRemove(boolean remove) {
+		this.remove = remove;
 	}
 
 }

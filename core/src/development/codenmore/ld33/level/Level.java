@@ -1,35 +1,41 @@
 package development.codenmore.ld33.level;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 
+import development.codenmore.ld33.assets.Assets;
+import development.codenmore.ld33.entities.Entity;
 import development.codenmore.ld33.entities.EntityManager;
 import development.codenmore.ld33.entities.Player;
-import development.codenmore.ld33.particles.ParticleEmitter;
+import development.codenmore.ld33.entities.components.CollisionComponent;
+import development.codenmore.ld33.entities.components.HumanMovementComponent;
+import development.codenmore.ld33.entities.components.LiftComponent;
+import development.codenmore.ld33.entities.components.MovementComponent;
 
 public class Level {
 	
 	//Level
-	private final int width = 20, height = 7;
-//	private TextureRegion background;
+	private int width = 20, height = 6;
+//	private Background background;
 	private byte[] tiles;
 	//Entities
 	private EntityManager entityManager;
-	ParticleEmitter e;
 	
 	public Level(){
 		entityManager = new EntityManager(new Player());
 		tiles = new byte[width * height];
 		genLevel();
 		
-		e = new ParticleEmitter(-1, Color.GREEN, 300, 300, 5, 5, 40, 80, 0, 360, 1, 2);
+		Entity e = new Entity(300, Tile.TILESIZE * 6 - 16, 20, 40, Assets.getRegion("human.stand.1"));
+		e.addComponent(new MovementComponent(60f));
+		e.addComponent(new CollisionComponent(e, 0, 0));
+		e.addComponent(new HumanMovementComponent());
+		e.addComponent(new LiftComponent());
+		entityManager.add(e);
 	}
 	
 	public void tick(float delta){
 		entityManager.tick(delta);
-		
-		e.tick(delta);
 	}
 	
 	public void render(SpriteBatch batch){
@@ -39,8 +45,6 @@ public class Level {
 			}
 		}
 		entityManager.render(batch);
-		
-		e.render(batch);
 	}
 	
 	public Tile getTile(int x, int y){
@@ -55,7 +59,7 @@ public class Level {
 				}else if(y == height - 2){//Transition
 					tiles[x + y * width] = Tile.grassDirtTile.getId();
 				}else{//Underground
-					if(MathUtils.randomBoolean(0.2f)){						
+					if(MathUtils.randomBoolean(0.1f)){						
 						tiles[x + y * width] = Tile.rockTile.getId();
 					}else{
 						tiles[x + y * width] = Tile.dirtTile.getId();
@@ -63,6 +67,38 @@ public class Level {
 				}
 			}
 		}
+	}
+	
+	//HELPERS
+	
+	public int getGroundLevel(){
+		return height * Tile.TILESIZE - Tile.TILESIZE / 2;
+	}
+	
+	//GETTERS SETTERS
+
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	public EntityManager getEntityManager() {
+		return entityManager;
+	}
+
+	public void setEntityManager(EntityManager entityManager) {
+		this.entityManager = entityManager;
 	}
 
 }

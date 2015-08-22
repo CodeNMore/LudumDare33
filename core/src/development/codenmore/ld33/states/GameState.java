@@ -2,6 +2,7 @@ package development.codenmore.ld33.states;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import development.codenmore.ld33.Handler;
 import development.codenmore.ld33.level.Level;
 
 public class GameState extends State {
@@ -11,6 +12,7 @@ public class GameState extends State {
 	
 	public GameState(){
 		level = new Level();
+		Handler.setLevel(level);
 	}
 
 	@Override

@@ -3,79 +3,107 @@ atlas.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-shuttle
+shuttle.1
   rotate: false
   xy: 0, 32
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
-cow
+shuttle.2
   rotate: false
   xy: 0, 0
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+shuttle.3
+  rotate: false
+  xy: 64, 32
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+shuttle.4
+  rotate: false
+  xy: 64, 0
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+cow
+  rotate: false
+  xy: 128, 32
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 tallBuilding
   rotate: false
-  xy: 64, 0
+  xy: 160, 0
   size: 32, 64
   orig: 32, 64
   offset: 0, 0
   index: -1
 beam
   rotate: false
-  xy: 96, 61
-  size: 16, 3
-  orig: 16, 3
+  xy: 128, 31
+  size: 16, 1
+  orig: 16, 1
   offset: 0, 0
   index: -1
 dirtTile
   rotate: false
-  xy: 112, 48
+  xy: 144, 16
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 grassTile
   rotate: false
-  xy: 96, 45
+  xy: 128, 15
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 grassTileFull
   rotate: false
-  xy: 112, 32
+  xy: 144, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 rock
   rotate: false
-  xy: 96, 29
+  xy: 192, 48
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 rockTile
   rotate: false
-  xy: 112, 16
+  xy: 192, 32
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-human.1
+human.stand.1
   rotate: false
-  xy: 32, 20
-  size: 6, 12
-  orig: 6, 12
+  xy: 128, 5
+  size: 6, 10
+  orig: 6, 10
+  offset: 0, 0
+  index: -1
+human.stand.2
+  rotate: false
+  xy: 208, 54
+  size: 6, 10
+  orig: 6, 10
   offset: 0, 0
   index: -1
 color
   rotate: false
-  xy: 96, 28
+  xy: 192, 31
   size: 1, 1
   orig: 1, 1
   offset: 0, 0

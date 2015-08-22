@@ -7,16 +7,31 @@ public class MovementComponent extends Component {
 	//ID
 	public static final int ID = 0;
 	//Data
-	private float x, y;
+	private float x, y, speed;
+	
+	public MovementComponent(float speed){
+		super(ID);
+		this.speed = speed;
+	}
 	
 	public MovementComponent(){
-		super(ID);
+		this(120);
 	}
 
 	@Override
 	public void tick(Entity e, float delta) {
 		e.incX(x * delta);
 		e.incY(y * delta);
+	}
+	
+	//HELPERS
+	
+	public void incX(float x){
+		this.x += x;
+	}
+	
+	public void incY(float y){
+		this.y += y;
 	}
 	
 	//GETTERS SETTERS
@@ -35,6 +50,14 @@ public class MovementComponent extends Component {
 
 	public void setY(float y) {
 		this.y = y;
+	}
+
+	public float getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(float speed) {
+		this.speed = speed;
 	}
 
 }

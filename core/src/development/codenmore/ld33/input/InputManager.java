@@ -34,7 +34,7 @@ public class InputManager implements InputProcessor {
 	public boolean keyUp(int keycode) {
 		if(keycode >= keysDown.length)
 			return false;
-		keysDown[keycode] = true;
+		keysDown[keycode] = false;
 		return true;
 	}
 

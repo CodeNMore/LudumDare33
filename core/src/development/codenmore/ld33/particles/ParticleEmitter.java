@@ -13,13 +13,15 @@ public class ParticleEmitter {
 	private Array<Particle> particles;
 	// Calculations
 	private int amount, generated;
+	private float rate, timer = 0f;
 	private int particleWidth, particleHeight;
 	private int minSpeed, maxSpeed, minAngle, maxAngle, minLife, maxLife;
 
-	public ParticleEmitter(int amount, Color color, int x, int y,
+	public ParticleEmitter(int amount, float rate, Color color, int x, int y,
 			int particleWidth, int particleHeight, int minSpeed, int maxSpeed,
 			int minAngle, int maxAngle, int minLife, int maxLife) {
 		this.amount = amount;
+		this.rate = rate;
 		this.color = color;
 		this.x = x;
 		this.y = y;
@@ -35,8 +37,13 @@ public class ParticleEmitter {
 	}
 
 	public void tick(float delta) {
-		if (amount == -1 || generated < amount)
-			emit();
+		timer += delta;
+		if (amount == -1 || generated < amount){
+			if(timer >= rate){
+				timer = 0f;
+				emit();
+			}
+		}
 
 		for (Particle p : particles) {
 			if (p.tick(delta)) {

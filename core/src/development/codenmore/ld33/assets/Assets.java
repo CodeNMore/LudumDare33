@@ -33,6 +33,13 @@ public class Assets {
 		return regions.get(name);
 	}
 	
+	public static TextureRegion[] getSeries(String name, int end){//Assume start = 1
+		TextureRegion[] ret = new TextureRegion[end];
+		for(int i = 1;i <= end;++i)
+			ret[i - 1] = getRegion(name + i);
+		return ret;
+	}
+	
 	public static void setFontSmall(){
 		font.getData().setScale(3.0f);
 	}
