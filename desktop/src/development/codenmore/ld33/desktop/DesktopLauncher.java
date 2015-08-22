@@ -7,6 +7,11 @@ import development.codenmore.ld33.Main;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+		
+		config.title = Main.TITLE;
+		config.width = Main.WIDTH;
+		config.height = Main.HEIGHT;
+		
 		new LwjglApplication(new Main(), config);
 	}
 }

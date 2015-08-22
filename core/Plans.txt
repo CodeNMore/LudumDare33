@@ -1,0 +1,35 @@
+Ludum Dare #33 with CodeNMore
+Java using LibGDX
+Theme: You are the Monster
+--------------
+Chosen Idea: Codename: "Saucer"
+- You are an alien
+	- You abduct humans from the surface
+	- Soldiers trying to destroy ship
+	- Can't abduct fellow aliens on surface
+		- You lose humans doing that?
+	- Single-screen, can move left/right
+		- Shoot down abduction beam
+		- Can lift people half-way and make them fall to death
+	- Pick up objects with beam and drop them
+TODO:
+- Entity system
+- Level rendering
+- AWESOME CODENMORE ART
+--------------
+Ideas:
+- Scare people - you are a monster!
+	- Must creep up on victims
+		- If they turn around you must stop abrupt!
+	- In the wilderness, scaring campers
+- You turn into a monster during the night
+	- Evolve over time?
+- You control a virus inside of people
+	- Design the virus to have different abilities
+	- 0-Gravity sidescrolling
+	- 3D-ish avoid white blood cells that will kill you
+		- Try to get to the brain of the human
+--------------
+Goals:
+- Stick with a simple-enough idea to complete fully
+- Don't try too many new things in programming
