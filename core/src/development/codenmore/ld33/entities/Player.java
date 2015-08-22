@@ -10,6 +10,7 @@ import development.codenmore.ld33.entities.components.AnimationComponent;
 import development.codenmore.ld33.entities.components.CollisionComponent;
 import development.codenmore.ld33.entities.components.MovementComponent;
 import development.codenmore.ld33.input.InputManager;
+import development.codenmore.ld33.ui.HUD;
 
 public class Player extends Entity {
 
@@ -19,18 +20,21 @@ public class Player extends Entity {
 	private CollisionComponent collisionComponent;
 	// Movement
 	private static final float velocityIncrement = 6.0f,
-			rotationIncrement = 1.2f, maxRotation = 16f,
-			rotateSpeedThreshhold = 40f;
+			rotationIncrement = 0.5f, maxRotation = 5f,
+			rotateSpeedThreshhold = 2f;
 	private float rotation = 0.0f;
 	private TractorBeam beam;
+	//UI
+	private HUD hud;
 
 	public Player() {
 		super(Main.WIDTH / 2 - 32, Main.HEIGHT - 64, 64, 32, Assets.getRegion("shuttle.1"));
 		beam = new TractorBeam(this);
+		hud = new HUD();
 		
 		movementComponent = new MovementComponent(180f);
 		addComponent(movementComponent);
-		animationComponent = new AnimationComponent(new Animation(0.1f, Assets.getSeries("shuttle.", 4)));
+		animationComponent = new AnimationComponent(new Animation(0.1f, Assets.getSeries("shuttle.", 1)));
 		addComponent(animationComponent);
 		collisionComponent = new CollisionComponent(this, 0, 0);
 		addComponent(collisionComponent);
@@ -42,6 +46,7 @@ public class Player extends Entity {
 		setRotation();
 		super.tick(delta);
 		beam.tick(delta);
+		hud.tick(delta);
 	}
 
 	@Override
@@ -49,6 +54,7 @@ public class Player extends Entity {
 		batch.draw(getTexture(), x, y, width / 2, height / 2, width, height, 1,
 				1, -rotation);
 		beam.render(batch);
+		hud.render(batch);
 	}
 
 	private void getInput() {
@@ -119,6 +125,14 @@ public class Player extends Entity {
 				if (rotation < 0)
 					rotation = 0;
 			}
+		}
+	}
+	
+	@Override//TODO: NOT WORKING
+	public void setRemove(boolean remove){
+		this.setRemove(remove);
+		if(remove == false){
+			System.out.println("DAMAGE");
 		}
 	}
 	

@@ -14,6 +14,7 @@ import development.codenmore.ld33.entities.components.HumanMovementComponent;
 import development.codenmore.ld33.entities.components.HumanShooterComponent;
 import development.codenmore.ld33.entities.components.LiftComponent;
 import development.codenmore.ld33.entities.components.MovementComponent;
+import development.codenmore.ld33.entities.components.ObjectComponent;
 
 public class Level {
 	
@@ -29,14 +30,14 @@ public class Level {
 		tiles = new byte[width * height];
 		genLevel();
 		
-		for(int i = 0;i < 40;++i){
+		for(int i = 0;i < 4;++i){
 			Entity e = new Entity(300, Tile.TILESIZE * 6 - 16, 12, 20, Assets.getRegion("human.stand.1"));
 			e.addComponent(new MovementComponent(60f));
 			e.addComponent(new CollisionComponent(e, 0, 0));
 			e.addComponent(new HumanMovementComponent());
 			if(MathUtils.randomBoolean(0.1f))
 				e.addComponent(new HumanShooterComponent());
-			e.addComponent(new LiftComponent());
+			e.addComponent(new LiftComponent(false));
 			AnimationComponent a = new AnimationComponent();
 			a.setLeft(new Animation(0.2f, Assets.getSeries("human.left.", 3)));
 			a.setRight(new Animation(0.2f, Assets.getSeries("human.right.", 3)));
@@ -45,6 +46,20 @@ public class Level {
 			e.addComponent(a);
 			entityManager.add(e);
 		}
+		
+		Entity ee = new Entity(200, Tile.TILESIZE * 6 - 16, 32, 32, Assets.getRegion("rock"));
+		ee.addComponent(new CollisionComponent(ee, 0, 0));
+		ee.addComponent(new MovementComponent());
+		ee.addComponent(new LiftComponent(true));
+		ee.addComponent(new ObjectComponent(3));
+		entityManager.add(ee);
+		
+		Entity e = new Entity(400, Tile.TILESIZE * 6 - 16, 40, 30, Assets.getRegion("cow"));
+		e.addComponent(new MovementComponent(50f));
+		e.addComponent(new CollisionComponent(e, 0, 0));
+		e.addComponent(new HumanMovementComponent());
+		e.addComponent(new LiftComponent(false));
+		entityManager.add(e);
 	}
 	
 	public void tick(float delta){
@@ -71,6 +86,8 @@ public class Level {
 					tiles[x + y * width] = Tile.grassTile.getId();
 				}else if(y == height - 2){//Transition
 					tiles[x + y * width] = Tile.grassDirtTile.getId();
+				}else if(y == 0){
+					tiles[x + y * width] = Tile.blackTile.getId();
 				}else{//Underground
 					if(MathUtils.randomBoolean(0.1f)){						
 						tiles[x + y * width] = Tile.rockTile.getId();

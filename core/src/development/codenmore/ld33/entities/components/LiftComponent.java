@@ -14,21 +14,38 @@ public class LiftComponent extends Component {
 	// Data
 	private static final float SPEED = 1.2f;
 	private LiftCallback callback;
-	private boolean lift = false, centered = false;
+	private boolean lift = false, centered = false, isObject = false;
 
-	public LiftComponent() {
+	public LiftComponent(boolean isObject) {
 		super(ID);
+		this.isObject = isObject;
 	}
 
 	@Override
 	public void tick(Entity e, float delta) {
+		//OBJECT STUFF
+		if(isObject){
+			if(!lift && shouldBeginLifting((CollisionComponent) e.getComponent(CollisionComponent.ID),
+					Handler.getLevel().getEntityManager().getPlayer().getBeam())){
+				beginLifting(null);
+			}
+		}
+		//Other
 		MovementComponent mc = e.getComponent(MovementComponent.ID);
 		// If not on ground, fall down
 		if (!lift && e.getY() > Handler.getLevel().getGroundLevel()) {
 			mc.incY(-9.8f);
+			if(isObject){
+				ObjectComponent oc = e.getComponent(ObjectComponent.ID);
+				oc.setFalling(true);
+			}
 		} else if (!lift && e.getY() <= Handler.getLevel().getGroundLevel()) {
 			mc.setY(0);
 			e.setY(Handler.getLevel().getGroundLevel());
+			if(isObject){
+				ObjectComponent oc = e.getComponent(ObjectComponent.ID);
+				oc.setFalling(false);
+			}
 		}
 		// Lift stuff
 		if (!lift)
@@ -42,22 +59,16 @@ public class LiftComponent extends Component {
 		if (centered) {
 			e.setX(player.getX() + player.getWidth() / 2 - e.getWidth() / 2);
 		} else {
-			if (e.getX() + e.getWidth() / 2 < player.getX() + player.getWidth()
-					/ 2) {
+			if (e.getX() + e.getWidth() / 2 < player.getX() + player.getWidth() / 2) {
 				e.incX(50f * delta);
-				if (e.getX() + e.getWidth() / 2 >= player.getX()
-						+ player.getWidth() / 2) {
-					e.setX(player.getX() + player.getWidth() / 2 - e.getWidth()
-							/ 2);
+				if (e.getX() + e.getWidth() / 2 >= player.getX() + player.getWidth() / 2) {
+					e.setX(player.getX() + player.getWidth() / 2 - e.getWidth() / 2);
 					centered = true;
 				}
-			} else if (e.getX() + e.getWidth() / 2 > player.getX()
-					+ player.getWidth() / 2) {
+			} else if (e.getX() + e.getWidth() / 2 > player.getX() + player.getWidth() / 2) {
 				e.incX(-50f * delta);
-				if (e.getX() + e.getWidth() / 2 <= player.getX()
-						+ player.getWidth() / 2) {
-					e.setX(player.getX() + player.getWidth() / 2 - e.getWidth()
-							/ 2);
+				if (e.getX() + e.getWidth() / 2 <= player.getX() + player.getWidth() / 2) {
+					e.setX(player.getX() + player.getWidth() / 2 - e.getWidth() / 2);
 					centered = true;
 				}
 			}
@@ -89,12 +100,12 @@ public class LiftComponent extends Component {
 
 	public void beginLifting(LiftCallback callback) {
 		lift = true;
-		centered = false;
 		this.callback = callback;
 	}
 
 	public void stopLifting() {
 		lift = false;
+		centered = false;
 		if (callback != null)
 			callback.onLiftStop();
 	}

@@ -12,13 +12,14 @@ public class TractorBeam {
 	// Other stuff
 	private Entity entity;
 	private static final float SPEED = 500f, RETRACT_SPEED = SPEED, OFFSET = 3f;
+	public static final float BEAMENERGYTIME = 7.5f, REFILL = BEAMENERGYTIME / 2f;
 	private static TextureRegion texture = Assets.getRegion("beam");
 	private float y = 0f;
 	private int width = 34, height = 1;
 	// Beam specifications
 	private boolean emit = false, doDraw = false;
 	// Energy specifications
-	private float timer = 0f, beamEnergyTime = 20f;
+	private float timer = 0f;
 	private boolean powerOut = false;
 
 	public TractorBeam(Entity entity) {
@@ -28,7 +29,7 @@ public class TractorBeam {
 	public void tick(float delta) {
 		if (!powerOut && emit) {
 			timer += delta;
-			if(timer >= beamEnergyTime){
+			if(timer >= BEAMENERGYTIME){
 				powerOut = true;
 				return;
 			}
@@ -48,9 +49,14 @@ public class TractorBeam {
 				height = 0;
 			}
 		}else if(powerOut){
-			timer = 0f;
 			if(!emit)
 				powerOut = false;
+		}
+		
+		if(!emit){
+			timer -= REFILL * delta;
+			if(timer < 0)
+				timer = 0;
 		}
 	}
 
@@ -85,6 +91,10 @@ public class TractorBeam {
 
 	public void setEntity(Entity entity) {
 		this.entity = entity;
+	}
+	
+	public float getTimer(){
+		return timer;
 	}
 
 }

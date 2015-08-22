@@ -1,5 +1,6 @@
 package development.codenmore.ld33.entities.components;
 
+import development.codenmore.ld33.Handler;
 import development.codenmore.ld33.entities.Entity;
 
 public class ObjectComponent extends Component {
@@ -17,7 +18,41 @@ public class ObjectComponent extends Component {
 	
 	@Override
 	public void tick(Entity e, float delta){
+		CollisionComponent cc = e.getComponent(CollisionComponent.ID);
 		
+		if(falling){
+			for(Entity entity : Handler.getLevel().getEntityManager().getEntities()){
+				CollisionComponent ecc = entity.getComponent(CollisionComponent.ID);
+				if(ecc != null && !ecc.equals(cc) && !entity.isRemove()){
+					if(cc.getBounds().overlaps(ecc.getBounds())){
+						entity.setRemove(true);
+						health--;
+						if(health <= 0){
+							e.setRemove(true);
+							return;
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	//GETTERS SETTERS
+
+	public int getHealth() {
+		return health;
+	}
+
+	public void setHealth(int health) {
+		this.health = health;
+	}
+
+	public boolean isFalling() {
+		return falling;
+	}
+
+	public void setFalling(boolean falling) {
+		this.falling = falling;
 	}
 
 }

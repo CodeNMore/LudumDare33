@@ -1,6 +1,7 @@
 package development.codenmore.ld33.assets;
 
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -41,7 +42,7 @@ public class Assets {
 	}
 	
 	public static void setFontSmall(){
-		font.getData().setScale(3.0f);
+		font.getData().setScale(2.0f);
 	}
 	
 	public static void setFontMed(){
@@ -52,8 +53,12 @@ public class Assets {
 		font.getData().setScale(6.0f);
 	}
 	
+	public static void setFontColor(Color color){
+		font.setColor(color);
+	}
+	
 	public static void drawString(SpriteBatch batch, String str, float x, float y){
-		font.draw(batch, str, x, y);
+		font.draw(batch, str.toUpperCase(), x, y);
 	}
 	
 	public static void dispose(){

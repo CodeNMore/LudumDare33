@@ -17,6 +17,7 @@ public class EntityManager {
 		entities = new Array<Entity>();
 		bullets = new Array<Bullet>();
 		toRemove = new Array<Entity>();
+		add(player);
 	}
 	
 	public void tick(float delta){
@@ -28,8 +29,6 @@ public class EntityManager {
 				toRemove.add(entity);
 			}
 		}
-		//Player
-		player.tick(delta);
 		//Remove entities
 		for(Entity e : toRemove){
 			entities.removeValue(e, true);
@@ -45,7 +44,8 @@ public class EntityManager {
 	public void render(SpriteBatch batch){
 		//Entities
 		for(Entity e : entities){
-			e.render(batch);
+			if(!e.equals(player))
+				e.render(batch);
 		}
 		//Player
 		player.render(batch);
