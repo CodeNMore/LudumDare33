@@ -5,7 +5,10 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 
 import development.codenmore.ld33.Main;
+import development.codenmore.ld33.assets.Assets;
 import development.codenmore.ld33.entities.components.Component;
+import development.codenmore.ld33.entities.components.HumanShooterComponent;
+import development.codenmore.ld33.entities.components.MovementComponent;
 
 public class Entity {
 	
@@ -44,6 +47,15 @@ public class Entity {
 	public void render(SpriteBatch batch){
 		if(texture != null)
 			batch.draw(texture, x, y, width, height);
+		
+		HumanShooterComponent hsc = getComponent(HumanShooterComponent.ID);
+		MovementComponent mc = getComponent(MovementComponent.ID);
+		if(hsc != null && mc != null){
+			if(mc.getX() < 0)
+				batch.draw(Assets.getRegion("gun.left"), x - 3, y + 10, 6, 6);
+			else
+				batch.draw(Assets.getRegion("gun.right"), x + 8, y + 10, 6, 6);
+		}
 	}
 	
 	//BOUNDS

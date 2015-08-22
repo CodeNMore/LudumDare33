@@ -4,17 +4,19 @@ Theme: You are the Monster
 --------------
 Chosen Idea: Codename: "Saucer"
 - You are an alien
-	- You abduct humans from the surface
-	- Game stops when daytime occurs
+	TODO:
+	- ***Game stops when daytime occurs
 		- Every night it gets harder
 		- Must eliminate all humans (10 nights?)
-	- Soldiers trying to destroy ship
-	- Can't abduct fellow aliens on surface
-		- You lose humans doing that?
+	- ***Soldiers trying to destroy ship
+	- **Pick up objects with beam and drop them
+	- **Show health by lights on saucer
+	
+	- You abduct humans from the surface
 	- Single-screen, can move left/right
 		- Shoot down tractor beam
-		- Can lift people half-way and make them fall to death
-	- Pick up objects with beam and drop them
+	- Can't abduct fellow aliens on surface
+		- You lose humans doing that?
 --------------
 Ideas:
 - Scare people - you are a monster!

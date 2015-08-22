@@ -10,7 +10,7 @@ public class EntityManager {
 	//Entities
 	private Array<Entity> entities;
 	private Array<Integer> toRemove;
-//	private Array<Bullet> bullets;
+	private Array<Bullet> bullets;
 	
 	public EntityManager(Player player){
 		this.player = player;

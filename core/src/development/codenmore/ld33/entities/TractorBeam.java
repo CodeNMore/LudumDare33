@@ -14,7 +14,7 @@ public class TractorBeam {
 	private static final float SPEED = 500f, RETRACT_SPEED = SPEED, OFFSET = 3f;
 	private static TextureRegion texture = Assets.getRegion("beam");
 	private float y = 0f;
-	private int width = 40, height = 1;
+	private int width = 34, height = 1;
 	// Beam specifications
 	private boolean emit = false, doDraw = false;
 	// Energy specifications

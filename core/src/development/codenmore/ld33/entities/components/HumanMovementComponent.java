@@ -88,11 +88,21 @@ public class HumanMovementComponent extends Component {
 		}
 	}
 	
-	private void resetPause(){
+	public void resetPause(){
 		wandering = false;
 		pauseTime = MathUtils.random(MIN_PAUSE, MAX_PAUSE);
 		timer = 0f;
 		mc.setX(0);
+	}
+	
+	//GETTERS SETTERS
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 }

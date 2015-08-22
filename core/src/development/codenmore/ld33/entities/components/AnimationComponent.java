@@ -12,27 +12,36 @@ public class AnimationComponent extends Component {
 	//Animations
 	private MovementComponent mc;
 	private float timer = 0f;
-	private Animation left, right, standing;
+	private Animation left, right, standing, shooting;
 	
-	public AnimationComponent(Animation left, Animation right, Animation standing){
+	public AnimationComponent(Animation left, Animation right, Animation standing, Animation shooting){
 		super(ID);
 		setLeft(left);
 		setRight(right);
 		setStanding(standing);
+		setShooting(shooting);
 	}
 	
 	public AnimationComponent(Animation standing){
-		this(null, null, standing);
+		this(null, null, standing, null);
 	}
 	
 	public AnimationComponent(){
-		this(null, null, null);
+		this(null, null, null, null);
 	}
 
 	@Override
 	public void tick(Entity e, float delta) {
 		timer += delta;
 		mc = e.getComponent(MovementComponent.ID);
+		HumanShooterComponent hsc = e.getComponent(HumanShooterComponent.ID);
+		if(shooting != null && hsc != null){
+			if(hsc.isShooting()){
+				e.setTexture(shooting.getKeyFrame(timer));
+				return;
+			}
+		}
+		
 		if(mc == null || left == null || right == null){
 			e.setTexture(standing.getKeyFrame(timer));
 			return;
@@ -76,6 +85,16 @@ public class AnimationComponent extends Component {
 		this.standing = standing;
 		if(standing != null)
 			standing.setPlayMode(PlayMode.LOOP);
+	}
+
+	public Animation getShooting() {
+		return shooting;
+	}
+
+	public void setShooting(Animation shooting) {
+		this.shooting = shooting;
+		if(shooting != null)
+			shooting.setPlayMode(PlayMode.LOOP);
 	}
 
 }

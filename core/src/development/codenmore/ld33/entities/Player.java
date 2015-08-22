@@ -18,8 +18,8 @@ public class Player extends Entity {
 	private AnimationComponent animationComponent;
 	private CollisionComponent collisionComponent;
 	// Movement
-	private static final float velocityIncrement = 4.0f,
-			rotationIncrement = 1f, maxRotation = 15f,
+	private static final float velocityIncrement = 6.0f,
+			rotationIncrement = 1.2f, maxRotation = 16f,
 			rotateSpeedThreshhold = 40f;
 	private float rotation = 0.0f;
 	private TractorBeam beam;
