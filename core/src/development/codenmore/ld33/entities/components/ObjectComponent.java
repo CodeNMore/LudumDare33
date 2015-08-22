@@ -2,6 +2,7 @@ package development.codenmore.ld33.entities.components;
 
 import development.codenmore.ld33.Handler;
 import development.codenmore.ld33.entities.Entity;
+import development.codenmore.ld33.entities.Player;
 
 public class ObjectComponent extends Component {
 
@@ -25,6 +26,13 @@ public class ObjectComponent extends Component {
 				CollisionComponent ecc = entity.getComponent(CollisionComponent.ID);
 				if(ecc != null && !ecc.equals(cc) && !entity.isRemove()){
 					if(cc.getBounds().overlaps(ecc.getBounds())){
+						if(entity.hasComponent(PlayerComponent.ID)){
+							//Damage player
+							((Player) entity).damage(1);
+							//Destroy object
+							e.setRemove(true);
+							return;
+						}
 						entity.setRemove(true);
 						health--;
 						if(health <= 0){

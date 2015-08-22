@@ -76,7 +76,7 @@ public class LiftComponent extends Component {
 
 		Rectangle playerObtainBounds = ((CollisionComponent) player.getComponent(CollisionComponent.ID)).getBounds();
 		playerObtainBounds.y += e.getHeight();
-		if(playerObtainBounds.overlaps(cc.getBounds())){
+		if(!isObject && playerObtainBounds.overlaps(cc.getBounds())){
 			e.setRemove(true);
 			return;
 		}

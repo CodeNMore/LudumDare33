@@ -1,20 +1,17 @@
 package development.codenmore.ld33.level;
 
-import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.utils.Array;
 
+import development.codenmore.ld33.Main;
 import development.codenmore.ld33.assets.Assets;
-import development.codenmore.ld33.entities.Entity;
+import development.codenmore.ld33.buildings.Building;
+import development.codenmore.ld33.buildings.TallBuilding;
 import development.codenmore.ld33.entities.EntityManager;
 import development.codenmore.ld33.entities.Player;
-import development.codenmore.ld33.entities.components.AnimationComponent;
-import development.codenmore.ld33.entities.components.CollisionComponent;
-import development.codenmore.ld33.entities.components.HumanMovementComponent;
-import development.codenmore.ld33.entities.components.HumanShooterComponent;
-import development.codenmore.ld33.entities.components.LiftComponent;
-import development.codenmore.ld33.entities.components.MovementComponent;
-import development.codenmore.ld33.entities.components.ObjectComponent;
+import development.codenmore.ld33.entities.Turret;
 
 public class Level {
 	
@@ -22,56 +19,42 @@ public class Level {
 	private int width = 20, height = 6;
 //	private Background background;
 	private byte[] tiles;
+	private Array<Building> buildings;
 	//Entities
 	private EntityManager entityManager;
 	
 	public Level(){
 		entityManager = new EntityManager(new Player());
+		buildings = new Array<Building>();
 		tiles = new byte[width * height];
 		genLevel();
 		
-		for(int i = 0;i < 4;++i){
-			Entity e = new Entity(300, Tile.TILESIZE * 6 - 16, 12, 20, Assets.getRegion("human.stand.1"));
-			e.addComponent(new MovementComponent(60f));
-			e.addComponent(new CollisionComponent(e, 0, 0));
-			e.addComponent(new HumanMovementComponent());
-			if(MathUtils.randomBoolean(0.1f))
-				e.addComponent(new HumanShooterComponent());
-			e.addComponent(new LiftComponent(false));
-			AnimationComponent a = new AnimationComponent();
-			a.setLeft(new Animation(0.2f, Assets.getSeries("human.left.", 3)));
-			a.setRight(new Animation(0.2f, Assets.getSeries("human.right.", 3)));
-			a.setStanding(new Animation(0.3f, Assets.getSeries("human.stand.", 2)));
-			a.setShooting(new Animation(0.1f, Assets.getSeries("human.shoot.", 2)));
-			e.addComponent(a);
-			entityManager.add(e);
-		}
+		addBuilding(new TallBuilding(500, getGroundLevel()));
+		addBuilding(new TallBuilding(300, getGroundLevel()));
 		
-		Entity ee = new Entity(200, Tile.TILESIZE * 6 - 16, 32, 32, Assets.getRegion("rock"));
-		ee.addComponent(new CollisionComponent(ee, 0, 0));
-		ee.addComponent(new MovementComponent());
-		ee.addComponent(new LiftComponent(true));
-		ee.addComponent(new ObjectComponent(3));
-		entityManager.add(ee);
-		
-		Entity e = new Entity(400, Tile.TILESIZE * 6 - 16, 40, 30, Assets.getRegion("cow"));
-		e.addComponent(new MovementComponent(50f));
-		e.addComponent(new CollisionComponent(e, 0, 0));
-		e.addComponent(new HumanMovementComponent());
-		e.addComponent(new LiftComponent(false));
-		entityManager.add(e);
+		new Turret(entityManager, 170, getGroundLevel(), 4.0f);
 	}
 	
 	public void tick(float delta){
 		entityManager.tick(delta);
+		for(Building b : buildings)
+			b.tick(delta);
 	}
 	
 	public void render(SpriteBatch batch){
+		batch.setColor(Color.DARK_GRAY);
+		batch.draw(Assets.getRegion("color"), 0, 0, Main.WIDTH, Main.HEIGHT);
+		batch.setColor(Color.WHITE);
+		
 		for(int x = 0;x < width;++x){
 			for(int y = 0;y < height;++y){
 				getTile(x, y).render(batch, x * Tile.TILESIZE, y * Tile.TILESIZE);
 			}
 		}
+		
+		for(Building b : buildings)
+			b.render(batch);
+		
 		entityManager.render(batch);
 	}
 	
@@ -100,6 +83,10 @@ public class Level {
 	}
 	
 	//HELPERS
+	
+	public void addBuilding(Building b){
+		buildings.add(b);
+	}
 	
 	public int getGroundLevel(){
 		return (int) (height * Tile.TILESIZE - Tile.TILESIZE / 1.5f);

@@ -12,6 +12,7 @@ import development.codenmore.ld33.assets.Assets;
 import development.codenmore.ld33.entities.components.AnimationComponent;
 import development.codenmore.ld33.entities.components.CollisionComponent;
 import development.codenmore.ld33.entities.components.MovementComponent;
+import development.codenmore.ld33.entities.components.PlayerComponent;
 import development.codenmore.ld33.input.InputManager;
 import development.codenmore.ld33.ui.HUD;
 
@@ -38,12 +39,14 @@ public class Player extends Entity {
 		super(Main.WIDTH / 2 - 32, Main.HEIGHT - 64, 64, 32, Assets.getRegion("shuttle.1"));
 		beam = new TractorBeam(this);
 		hud = new HUD();
-		overlayAnimation = new Animation(0.04f, Assets.getSeries("shuttle.overlay.", 2));
+		setParticleColor(Color.BLACK);
+		overlayAnimation = new Animation(0.07f, Assets.getSeries("shuttle.overlay.", 2));
 		overlayAnimation.setPlayMode(PlayMode.LOOP);
 		
+		addComponent(new PlayerComponent());
 		movementComponent = new MovementComponent(180f);
 		addComponent(movementComponent);
-		animationComponent = new AnimationComponent(new Animation(0.04f, Assets.getSeries("shuttle.", 2)));
+		animationComponent = new AnimationComponent(new Animation(0.07f, Assets.getSeries("shuttle.", 2)));
 		addComponent(animationComponent);
 		collisionComponent = new CollisionComponent(this, 0, 0);
 		addComponent(collisionComponent);
@@ -143,11 +146,15 @@ public class Player extends Entity {
 		}
 	}
 	
+	public void damage(float i){
+		hud.damage(i);
+	}
+	
 	@Override//TODO: NOT WORKING
 	public void setRemove(boolean remove){
 		this.setRemove(remove);
 		if(remove == false){
-			System.out.println("DAMAGE");
+			System.out.println("REMOVE PLAYER");
 		}
 	}
 	
@@ -162,8 +169,8 @@ public class Player extends Entity {
 		}else if(y + height > Main.HEIGHT){
 			y = Main.HEIGHT - height;
 			movementComponent.setY(0);
-		}else if(y < 350){
-			y = 350;
+		}else if(y < 330){
+			y = 330;
 			movementComponent.setY(0);
 		}
 	}

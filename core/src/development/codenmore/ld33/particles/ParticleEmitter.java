@@ -17,7 +17,7 @@ public class ParticleEmitter {
 	private int particleWidth, particleHeight;
 	private int minSpeed, maxSpeed, minAngle, maxAngle, minLife, maxLife;
 
-	public ParticleEmitter(int amount, float rate, Color color, int x, int y,
+	public ParticleEmitter(int amount, float rate, Color color, float x, float y,
 			int particleWidth, int particleHeight, int minSpeed, int maxSpeed,
 			int minAngle, int maxAngle, int minLife, int maxLife) {
 		this.amount = amount;
@@ -34,9 +34,10 @@ public class ParticleEmitter {
 		this.minLife = minLife;
 		this.maxLife = maxLife;
 		particles = new Array<Particle>();
+		emit();
 	}
 
-	public void tick(float delta) {
+	public boolean tick(float delta) {
 		timer += delta;
 		if (amount == -1 || generated < amount){
 			if(timer >= rate){
@@ -48,9 +49,12 @@ public class ParticleEmitter {
 		for (Particle p : particles) {
 			if (p.tick(delta)) {
 				particles.removeValue(p, true);
-				generated--;
 			}
 		}
+		
+		if(amount != -1 && particles.size <= 0)
+			return true;
+		return false;
 	}
 
 	public void render(SpriteBatch batch) {

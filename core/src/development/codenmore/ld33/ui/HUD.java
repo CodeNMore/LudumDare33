@@ -9,6 +9,7 @@ import development.codenmore.ld33.entities.TractorBeam;
 
 public class HUD {
 	
+	private float health = 3f;
 	private FillBar energyBar;
 	
 	public HUD(){
@@ -30,7 +31,19 @@ public class HUD {
 	}
 	
 	public Color getHealthColor(){
-		return Color.RED;
+		if(health < 2){
+			return Color.RED;
+		}else if(health < 3){
+			return Color.ORANGE;
+		}else{
+			return Color.GREEN;
+		}
+	}
+	
+	public void damage(float i){
+		health -= i;
+		//TODO: CHECK IF HEALTH BELOW 0
+		System.out.println("DAMAGE");
 	}
 
 }

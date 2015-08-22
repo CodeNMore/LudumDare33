@@ -5,8 +5,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 
+import development.codenmore.ld33.Handler;
 import development.codenmore.ld33.Main;
 import development.codenmore.ld33.assets.Assets;
+import development.codenmore.ld33.entities.components.CollisionComponent;
 
 public class Bullet {
 	
@@ -31,6 +33,13 @@ public class Bullet {
 		if(x < 0 || y < 0 || x > Main.WIDTH || y > Main.HEIGHT)
 			return true;
 		
+		Player player = Handler.getLevel().getEntityManager().getPlayer();
+		if(((CollisionComponent) player.getComponent(CollisionComponent.ID)).getBounds()
+				.overlaps(getBounds())){
+			player.damage(0.5f);
+			return true;
+		}
+		
 		return false;
 	}
 	
@@ -42,6 +51,22 @@ public class Bullet {
 	
 	public Rectangle getBounds(){
 		return new Rectangle(x, y, 3, 3);
+	}
+
+	public float getX() {
+		return x;
+	}
+
+	public void setX(float x) {
+		this.x = x;
+	}
+
+	public float getY() {
+		return y;
+	}
+
+	public void setY(float y) {
+		this.y = y;
 	}
 
 }

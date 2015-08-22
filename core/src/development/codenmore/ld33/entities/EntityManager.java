@@ -1,7 +1,10 @@
 package development.codenmore.ld33.entities;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
+
+import development.codenmore.ld33.particles.ParticleEmitter;
 
 public class EntityManager {
 	
@@ -11,12 +14,14 @@ public class EntityManager {
 	private Array<Entity> entities;
 	private Array<Entity> toRemove;
 	private Array<Bullet> bullets;
+	private Array<ParticleEmitter> emitters;
 	
 	public EntityManager(Player player){
 		this.player = player;
 		entities = new Array<Entity>();
 		bullets = new Array<Bullet>();
 		toRemove = new Array<Entity>();
+		emitters = new Array<ParticleEmitter>();
 		add(player);
 	}
 	
@@ -31,13 +36,27 @@ public class EntityManager {
 		}
 		//Remove entities
 		for(Entity e : toRemove){
+			emitters.add(new ParticleEmitter(10, 0f,
+					e.getParticleColor(), e.getX() + e.getWidth() / 2,
+					e.getY() + e.getHeight() / 2,
+					3, 3, 40, 70, 60, 120, 2, 4));
 			entities.removeValue(e, true);
 		}
 		toRemove.clear();
 		//Bullets
 		for(Bullet b : bullets){
-			if(b.tick(delta))
+			if(b.tick(delta)){
+				emitters.add(new ParticleEmitter(10, 0f,
+						Color.LIGHT_GRAY, b.getX() + 3,
+						b.getY() + 3,
+						1, 1, 30, 50, 60, 120, 1, 2));
 				bullets.removeValue(b, true);
+			}
+		}
+		//Particles
+		for(ParticleEmitter p : emitters){
+			if(p.tick(delta))
+				emitters.removeValue(p, true);
 		}
 	}
 	
@@ -53,12 +72,21 @@ public class EntityManager {
 		for(Bullet b : bullets){
 			b.render(batch);
 		}
+		//Particles
+		for(ParticleEmitter p : emitters)
+			p.render(batch);
 	}
 	
 	//BULLETS
 	
 	public void addBullet(Bullet b){
 		bullets.add(b);
+	}
+	
+	//EMITTERS
+	
+	public void addEmitter(ParticleEmitter e){
+		emitters.add(e);
 	}
 	
 	//ENTITIES

@@ -1,5 +1,6 @@
 package development.codenmore.ld33.entities;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
@@ -17,6 +18,7 @@ public class Entity {
 	protected int width, height;
 	private boolean remove = false;
 	private TextureRegion texture;
+	private Color particleColor = Color.WHITE;
 	//Components
 	private Array<Component> components;
 	
@@ -155,6 +157,14 @@ public class Entity {
 
 	public void setRemove(boolean remove) {
 		this.remove = remove;
+	}
+
+	public Color getParticleColor() {
+		return particleColor;
+	}
+
+	public void setParticleColor(Color particleColor) {
+		this.particleColor = particleColor;
 	}
 
 }
