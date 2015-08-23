@@ -39,7 +39,7 @@ public class EntityManager {
 			emitters.add(new ParticleEmitter(10, 0f,
 					e.getParticleColor(), e.getX() + e.getWidth() / 2,
 					e.getY() + e.getHeight() / 2,
-					3, 3, 40, 70, 60, 120, 2, 4));
+					3, 3, 40, 70, 60, 120, 2, 3));
 			entities.removeValue(e, true);
 		}
 		toRemove.clear();

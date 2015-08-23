@@ -17,7 +17,7 @@ public class Turret extends Entity {
 		super(x, y, 26, 26, Assets.getRegion("turret"));
 		this.shootTime = shootTime;
 		addComponent(new CollisionComponent(this, 0, 0));
-		setParticleColor(Color.OLIVE);
+		setParticleColor(Color.LIGHT_GRAY);
 		
 		manager.add(this);
 	}

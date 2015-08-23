@@ -40,13 +40,13 @@ public class Player extends Entity {
 		beam = new TractorBeam(this);
 		hud = new HUD();
 		setParticleColor(Color.BLACK);
-		overlayAnimation = new Animation(0.07f, Assets.getSeries("shuttle.overlay.", 2));
+		overlayAnimation = new Animation(0.1f, Assets.getSeries("shuttle.overlay.", 2));
 		overlayAnimation.setPlayMode(PlayMode.LOOP);
 		
 		addComponent(new PlayerComponent());
 		movementComponent = new MovementComponent(180f);
 		addComponent(movementComponent);
-		animationComponent = new AnimationComponent(new Animation(0.07f, Assets.getSeries("shuttle.", 2)));
+		animationComponent = new AnimationComponent(new Animation(0.1f, Assets.getSeries("shuttle.", 2)));
 		addComponent(animationComponent);
 		collisionComponent = new CollisionComponent(this, 0, 0);
 		addComponent(collisionComponent);
@@ -148,6 +148,10 @@ public class Player extends Entity {
 	
 	public void damage(float i){
 		hud.damage(i);
+	}
+	
+	public void incQuota(int i){
+		hud.incQuota(i);
 	}
 	
 	@Override//TODO: NOT WORKING

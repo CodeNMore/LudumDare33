@@ -3,6 +3,7 @@ package development.codenmore.ld33.entities.components;
 import development.codenmore.ld33.Handler;
 import development.codenmore.ld33.entities.Entity;
 import development.codenmore.ld33.entities.Player;
+import development.codenmore.ld33.entities.Turret;
 
 public class ObjectComponent extends Component {
 
@@ -28,12 +29,15 @@ public class ObjectComponent extends Component {
 					if(cc.getBounds().overlaps(ecc.getBounds())){
 						if(entity.hasComponent(PlayerComponent.ID)){
 							//Damage player
-							((Player) entity).damage(1);
+							((Player) entity).damage(0.7f);//cause it runs 2 times for some reason
 							//Destroy object
 							e.setRemove(true);
 							return;
 						}
 						entity.setRemove(true);
+						if(entity instanceof Turret)//Subtract two cause it takes more hits
+							health -= 2;
+						//Minus health
 						health--;
 						if(health <= 0){
 							e.setRemove(true);

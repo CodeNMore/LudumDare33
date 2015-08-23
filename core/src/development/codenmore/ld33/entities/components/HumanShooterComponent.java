@@ -39,7 +39,7 @@ public class HumanShooterComponent extends Component {
 				float x = e.getX() + e.getWidth() / 2;
 				float y = e.getY() + e.getHeight();
 				float x2t = player.getX() + player.getWidth() / 2;
-				float x2 = MathUtils.random(x2t - player.getWidth() / 1.5f, x2t + player.getWidth() / 1.5f);
+				float x2 = MathUtils.random(x2t - player.getWidth() / 1.1f, x2t + player.getWidth() / 1.1f);
 				float y2 = player.getY() + player.getHeight() / 2;
 				float angleR = MathUtils.atan2(y2 - y, x2 - x);
 				float angleX = MathUtils.cos(angleR);
@@ -48,7 +48,7 @@ public class HumanShooterComponent extends Component {
 				
 				shooting = true;
 				bulletsToShoot--;
-				timeToShoot = MathUtils.random(0.4f, 1.0f);
+				timeToShoot = MathUtils.random(0.8f, 1.9f);
 				fireTimer = 0f;
 				if(bulletsToShoot <= 0)
 					reset();
@@ -74,7 +74,7 @@ public class HumanShooterComponent extends Component {
 	private void reset(){
 		waitTimer = 0f;
 		waitTime = MathUtils.random(2.5f, 7.5f);
-		bulletsToShoot = MathUtils.random(1, 3);
+		bulletsToShoot = MathUtils.random(1, 2);
 	}
 	
 	//GETTERS SETTERS

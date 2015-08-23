@@ -78,6 +78,7 @@ public class LiftComponent extends Component {
 		playerObtainBounds.y += e.getHeight();
 		if(!isObject && playerObtainBounds.overlaps(cc.getBounds())){
 			e.setRemove(true);
+			player.incQuota(1);
 			return;
 		}
 

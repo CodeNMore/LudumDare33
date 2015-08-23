@@ -19,6 +19,7 @@ public class Main extends ApplicationAdapter {
 	//Globals
 	public static final String TITLE = "Saucer";
 	public static final int WIDTH = 640, HEIGHT = 480;
+	public static final int DESKWIDTH = WIDTH, DESKHEIGHT = HEIGHT;
 	//Rendering stuff
 	private SpriteBatch batch;
 	private OrthographicCamera cam;
