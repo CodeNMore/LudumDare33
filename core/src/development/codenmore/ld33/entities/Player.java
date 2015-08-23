@@ -31,7 +31,6 @@ public class Player extends Entity {
 	//Overlay
 	private Animation overlayAnimation;
 	private TextureRegion overlayTexture = Assets.getRegion("shuttle.overlay.1");
-	private float animTimer = 0f;
 	//UI
 	private HUD hud;
 
@@ -57,8 +56,7 @@ public class Player extends Entity {
 		getInput();
 		setRotation();
 		super.tick(delta);
-		animTimer += delta;
-		overlayTexture = overlayAnimation.getKeyFrame(animTimer);
+		overlayTexture = overlayAnimation.getKeyFrame(animationComponent.getTimer());
 		beam.tick(delta);
 		hud.tick(delta);
 	}
@@ -154,14 +152,6 @@ public class Player extends Entity {
 		hud.incQuota(i);
 	}
 	
-	@Override//TODO: NOT WORKING
-	public void setRemove(boolean remove){
-		this.setRemove(remove);
-		if(remove == false){
-			System.out.println("REMOVE PLAYER");
-		}
-	}
-	
 	@Override
 	public void checkBounds(){
 		if(x < 0){
@@ -185,6 +175,14 @@ public class Player extends Entity {
 
 	public void setBeam(TractorBeam beam) {
 		this.beam = beam;
+	}
+
+	public HUD getHud() {
+		return hud;
+	}
+
+	public void setHud(HUD hud) {
+		this.hud = hud;
 	}
 
 }

@@ -19,7 +19,12 @@ public class Turret extends Entity {
 		addComponent(new CollisionComponent(this, 0, 0));
 		setParticleColor(Color.LIGHT_GRAY);
 		
-		manager.add(this);
+		if(manager != null)
+			manager.add(this);
+	}
+	
+	public Turret(){
+		this(null, 0, 0, 10);
 	}
 	
 	@Override
@@ -33,7 +38,7 @@ public class Turret extends Entity {
 			float x = this.x + width / 2;
 			float y = this.y + height;
 			float x2t = player.getX() + player.getWidth() / 2;
-			float x2 = MathUtils.random(x2t - player.getWidth() / 1.5f, x2t + player.getWidth() / 1.5f);
+			float x2 = MathUtils.random(x2t - player.getWidth() / 1.2f, x2t + player.getWidth() / 1.2f);
 			float y2 = player.getY() + player.getHeight() / 2;
 			float angleR = MathUtils.atan2(y2 - y, x2 - x);
 			float angleX = MathUtils.cos(angleR);

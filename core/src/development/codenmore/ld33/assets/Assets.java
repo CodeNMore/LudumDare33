@@ -24,6 +24,7 @@ public class Assets {
 	
 	public static void postInit(){
 		font = manager.get("font/font.fnt");
+		font.getData().setLineHeight(8.5f);
 		atlas = manager.get("textures/atlas.pack", TextureAtlas.class);
 	}
 	

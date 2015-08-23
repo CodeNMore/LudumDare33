@@ -36,8 +36,7 @@ public class Bullet {
 		Player player = Handler.getLevel().getEntityManager().getPlayer();
 		if(((CollisionComponent) player.getComponent(CollisionComponent.ID)).getBounds()
 				.overlaps(getBounds())){
-			player.damage(0.1f);
-			System.out.println("DMG");
+			player.damage(0.3f);
 			return true;
 		}
 		

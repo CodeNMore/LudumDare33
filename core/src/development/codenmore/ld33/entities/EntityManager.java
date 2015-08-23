@@ -4,19 +4,22 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 
+import development.codenmore.ld33.level.Level;
 import development.codenmore.ld33.particles.ParticleEmitter;
 
 public class EntityManager {
 	
 	//Player
 	private Player player;
+	private Level level;
 	//Entities
 	private Array<Entity> entities;
 	private Array<Entity> toRemove;
 	private Array<Bullet> bullets;
 	private Array<ParticleEmitter> emitters;
 	
-	public EntityManager(Player player){
+	public EntityManager(Level level, Player player){
+		this.level = level;
 		this.player = player;
 		entities = new Array<Entity>();
 		bullets = new Array<Bullet>();
@@ -40,6 +43,11 @@ public class EntityManager {
 					e.getParticleColor(), e.getX() + e.getWidth() / 2,
 					e.getY() + e.getHeight() / 2,
 					3, 3, 40, 70, 60, 120, 2, 3));
+			if(e instanceof Cow){
+				level.getGameState().getDay().incCowCount(-1);
+			}else if(e instanceof Human){
+				level.getGameState().getDay().incHumanCount(-1);
+			}
 			entities.removeValue(e, true);
 		}
 		toRemove.clear();
@@ -93,6 +101,10 @@ public class EntityManager {
 	
 	public void add(Entity e){
 		entities.add(e);
+	}
+	
+	public void addAll(Array<Entity> entities){
+		this.entities.addAll(entities);
 	}
 	
 	public void remove(Entity e){

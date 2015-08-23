@@ -18,7 +18,12 @@ public class Rock extends Entity {
 		addComponent(new ObjectComponent(3));
 		setParticleColor(Color.OLIVE);
 		
-		manager.add(this);
+		if(manager != null)
+			manager.add(this);
+	}
+	
+	public Rock(){
+		this(null, 0, 0);
 	}
 
 }

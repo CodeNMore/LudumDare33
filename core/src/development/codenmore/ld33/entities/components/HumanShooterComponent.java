@@ -39,7 +39,7 @@ public class HumanShooterComponent extends Component {
 				float x = e.getX() + e.getWidth() / 2;
 				float y = e.getY() + e.getHeight();
 				float x2t = player.getX() + player.getWidth() / 2;
-				float x2 = MathUtils.random(x2t - player.getWidth() / 1.1f, x2t + player.getWidth() / 1.1f);
+				float x2 = MathUtils.random(x2t - player.getWidth(), x2t + player.getWidth());
 				float y2 = player.getY() + player.getHeight() / 2;
 				float angleR = MathUtils.atan2(y2 - y, x2 - x);
 				float angleX = MathUtils.cos(angleR);

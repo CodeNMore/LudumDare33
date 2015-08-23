@@ -97,4 +97,12 @@ public class AnimationComponent extends Component {
 			shooting.setPlayMode(PlayMode.LOOP);
 	}
 
+	public float getTimer() {
+		return timer;
+	}
+
+	public void setTimer(float timer) {
+		this.timer = timer;
+	}
+
 }

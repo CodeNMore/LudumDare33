@@ -34,7 +34,7 @@ public class LoadingState extends State {
 		timer += delta;
 		if(done && timer >= MINTIME){
 			State.popState();
-			State.pushState(new GameState());
+			State.pushState(new HomeState());
 		}
 	}
 

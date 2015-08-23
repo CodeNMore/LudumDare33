@@ -7,5 +7,10 @@ public class TallBuilding extends Building {
 	public TallBuilding(float x, float y) {
 		super(x, y, 80, 128, Assets.getRegion("tallBuilding"));
 	}
+	
+	
+	public TallBuilding(){
+		this(0, 0);
+	}
 
 }

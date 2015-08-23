@@ -27,7 +27,12 @@ public class Cow extends Entity {
 		
 		setParticleColor(Color.RED);
 		
-		manager.add(this);
+		if(manager != null)
+			manager.add(this);
+	}
+	
+	public Cow(){
+		this(null, 0, 0);
 	}
 
 }

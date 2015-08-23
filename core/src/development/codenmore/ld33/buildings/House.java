@@ -7,5 +7,10 @@ public class House extends Building {
 	public House(float x, float y) {
 		super(x, y, 80, 80, Assets.getRegion("house"));
 	}
+	
+	
+	public House(){
+		this(0, 0);
+	}
 
 }

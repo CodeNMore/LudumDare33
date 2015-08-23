@@ -5,52 +5,48 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 
 import development.codenmore.ld33.Main;
-import development.codenmore.ld33.assets.Assets;
-import development.codenmore.ld33.buildings.Barn;
 import development.codenmore.ld33.buildings.Building;
-import development.codenmore.ld33.buildings.House;
-import development.codenmore.ld33.buildings.Pub;
-import development.codenmore.ld33.buildings.TallBuilding;
-import development.codenmore.ld33.entities.Cow;
 import development.codenmore.ld33.entities.EntityManager;
-import development.codenmore.ld33.entities.Human;
 import development.codenmore.ld33.entities.Player;
-import development.codenmore.ld33.entities.Rock;
-import development.codenmore.ld33.entities.Turret;
+import development.codenmore.ld33.states.GameState;
 import development.codenmore.ld33.ui.Background;
 
 public class Level {
 
 	// Level
+	private GameState gameState;
 	private int width = 20, height = 6;
+	private int biome;
 	 private Background background;
 	private byte[] tiles;
 	private Array<Building> buildings;
 	// Entities
 	private EntityManager entityManager;
 
-	public Level() {
-		entityManager = new EntityManager(new Player());
+	public Level(GameState gameState, int biome) {
+		this.gameState = gameState;
+		this.biome = biome;
+		entityManager = new EntityManager(this, new Player());
 		buildings = new Array<Building>();
 		tiles = new byte[width * height];
-		background = new Background(Assets.getRegion("blueSky"), 
+		background = new Background(gameState.getDay().getNightTime(), 
 				0, Tile.TILESIZE * height, Main.WIDTH,
 				Main.HEIGHT - Tile.TILESIZE * height, 14.0f);
-		genLevel(2);// 0-grass 1-desert 2-industrial
+		genLevel(biome);// 0-grass 1-desert 2-industrial
 
-		addBuilding(new Pub(400, getGroundLevel()));
-		addBuilding(new House(300, getGroundLevel()));
-		addBuilding(new TallBuilding(200, getGroundLevel()));
-		addBuilding(new Barn(100, getGroundLevel()));
-
-		new Turret(entityManager, 170, getGroundLevel(), 5.0f);
-		
-		for(int i = 0;i < 4;++i){
-			new Cow(entityManager, 270, getGroundLevel());
-			new Human(entityManager, 270, getGroundLevel(), false);
-		}
-		
-		new Rock(entityManager, 270, getGroundLevel());
+//		addBuilding(new Pub(400, getGroundLevel()));
+//		addBuilding(new House(300, getGroundLevel()));
+//		addBuilding(new TallBuilding(200, getGroundLevel()));
+//		addBuilding(new Barn(100, getGroundLevel()));
+//
+//		new Turret(entityManager, 170, getGroundLevel(), 5.0f);
+//		
+//		for(int i = 0;i < 4;++i){
+//			new Cow(entityManager, 270, getGroundLevel());
+//			new Human(entityManager, 270, getGroundLevel(), false);
+//		}
+//		
+//		new Rock(entityManager, 270, getGroundLevel());
 	}
 
 	public void tick(float delta) {
@@ -158,6 +154,38 @@ public class Level {
 
 	public void setEntityManager(EntityManager entityManager) {
 		this.entityManager = entityManager;
+	}
+
+	public Background getBackground() {
+		return background;
+	}
+
+	public void setBackground(Background background) {
+		this.background = background;
+	}
+
+	public Array<Building> getBuildings() {
+		return buildings;
+	}
+
+	public void setBuildings(Array<Building> buildings) {
+		this.buildings = buildings;
+	}
+
+	public int getBiome() {
+		return biome;
+	}
+
+	public void setBiome(int biome) {
+		this.biome = biome;
+	}
+
+	public GameState getGameState() {
+		return gameState;
+	}
+
+	public void setGameState(GameState gameState) {
+		this.gameState = gameState;
 	}
 
 }

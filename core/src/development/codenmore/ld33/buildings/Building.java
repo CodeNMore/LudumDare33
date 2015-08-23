@@ -26,6 +26,12 @@ public class Building {
 		batch.draw(texture, x, y, width, height);
 	}
 	
+	//HELPERS
+	
+	public float getCenterX(){
+		return x + width / 2;
+	}
+	
 	//GETTERS SETTERS
 
 	public float getX() {

@@ -7,19 +7,16 @@ import development.codenmore.ld33.assets.Assets;
 import development.codenmore.ld33.entities.components.AnimationComponent;
 import development.codenmore.ld33.entities.components.CollisionComponent;
 import development.codenmore.ld33.entities.components.HumanMovementComponent;
-import development.codenmore.ld33.entities.components.HumanShooterComponent;
 import development.codenmore.ld33.entities.components.LiftComponent;
 import development.codenmore.ld33.entities.components.MovementComponent;
 
 public class Human extends Entity {
 	
-	public Human(EntityManager manager, float x, float y, boolean shooter){
+	public Human(EntityManager manager, float x, float y){
 		super(x, y, 12, 20, Assets.getRegion("human.stand.1"));
 		addComponent(new MovementComponent(60f));
 		addComponent(new CollisionComponent(this, 0, 0));
 		addComponent(new HumanMovementComponent());
-		if(shooter)
-			addComponent(new HumanShooterComponent());
 		addComponent(new LiftComponent(false));
 		
 		AnimationComponent a = new AnimationComponent();
@@ -31,7 +28,12 @@ public class Human extends Entity {
 		
 		setParticleColor(Color.RED);
 		
-		manager.add(this);
+		if(manager != null)
+			manager.add(this);
+	}
+	
+	public Human(){
+		this(null, 0, 0);
 	}
 
 }

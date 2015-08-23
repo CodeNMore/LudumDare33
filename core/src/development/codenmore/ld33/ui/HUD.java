@@ -19,7 +19,6 @@ public class HUD {
 	public HUD(){
 		energyBar = new FillBar(5, 5, 200, 20, TractorBeam.BEAMENERGYTIME, TractorBeam.BEAMENERGYTIME, Color.GRAY, Color.YELLOW);
 		healthBar = new FillBar(208, 5, 200, 20, health, STARTHEALTH, Color.GRAY, Color.RED);
-		//TODO: QUOTA
 		quotaBar = new FillBar(414, 5, 200, 20, quotaFill, requiredQuota, Color.GRAY, Color.GREEN);
 	}
 	
@@ -68,7 +67,7 @@ public class HUD {
 		health -= i;
 		if(health <= 0){
 			health = 0;
-			System.out.println("UR DEAD PAL");
+			Handler.getLevel().getGameState().getDay().endNight(false, true);
 		}
 	}
 	
@@ -77,8 +76,36 @@ public class HUD {
 		if(quotaFill < 0)
 			quotaFill = 0;
 		else if(quotaFill >= requiredQuota){
-			System.out.println("MET QUOTA");
+			Handler.getLevel().getGameState().getDay().endNight(true, false);
 		}
+	}
+	
+	//GETTERS SETTERS
+	
+	public float getHealth() {
+		return health;
+	}
+
+	public void setHealth(float health) {
+		this.health = health;
+	}
+
+	public int getQuotaFill() {
+		return quotaFill;
+	}
+
+	public void setQuotaFill(int quotaFill) {
+		this.quotaFill = quotaFill;
+	}
+
+	public int getRequiredQuota() {
+		return requiredQuota;
+	}
+
+	public void setRequiredQuota(int requiredQuota) {
+		this.requiredQuota = requiredQuota;
+		quotaBar.setMaxFill(requiredQuota);
+		setQuotaFill(0);
 	}
 
 }
