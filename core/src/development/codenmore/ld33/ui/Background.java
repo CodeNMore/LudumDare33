@@ -9,7 +9,7 @@ import development.codenmore.ld33.assets.Assets;
 public class Background {
 	
 	//Cycle
-	private enum NightCycle{
+	public enum NightCycle{
 		DARK(Assets.getRegion("blackSky")),
 		MEDIUM(Assets.getRegion("blueSky")),
 		LIGHT(Assets.getRegion("lightSky"));
@@ -72,6 +72,10 @@ public class Background {
 
 	public void setNightTime(float nightTime) {
 		this.nightTime = nightTime;
+	}
+	
+	public void setNightCycle(NightCycle nightCycle){
+		this.nightCycle = nightCycle;
 	}
 
 }

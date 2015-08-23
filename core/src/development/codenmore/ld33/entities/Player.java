@@ -121,6 +121,10 @@ public class Player extends Entity {
 			beam.setEmit(false);
 		}
 	}
+	
+	public void setSpeed(float speed){
+		movementComponent.setSpeed(speed);
+	}
 
 	private void setRotation() {
 		if (movementComponent.getX() < -rotateSpeedThreshhold) {

@@ -1,11 +1,13 @@
 package development.codenmore.ld33.entities;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 
 import development.codenmore.ld33.Handler;
 import development.codenmore.ld33.assets.Assets;
+import development.codenmore.ld33.particles.ParticleEmitter;
 
 public class TractorBeam {
 
@@ -13,11 +15,14 @@ public class TractorBeam {
 	private Entity entity;
 	private static final float SPEED = 500f, RETRACT_SPEED = SPEED, OFFSET = 3f;
 	public static final float BEAMENERGYTIME = 7.5f, REFILL = BEAMENERGYTIME / 2f;
+	private static final Color brownColor = new Color(.64f, .18f, .18f, 1.0f);
 	private static TextureRegion texture = Assets.getRegion("beam");
 	private float y = 0f;
 	private int width = 34, height = 1;
 	// Beam specifications
 	private boolean emit = false, doDraw = false;
+	private boolean hitFloor = false;
+	private float floorTimer = 0f, floorTime = 0.2f;
 	// Energy specifications
 	private float timer = 0f;
 	private boolean powerOut = false;
@@ -37,8 +42,21 @@ public class TractorBeam {
 			height += SPEED * delta;
 			y = entity.getY() - height + OFFSET;
 			if(y < Handler.getLevel().getGroundLevel()){
+				if(!hitFloor){
+					hitFloor = true;
+					floorTimer = 0f;
+					Handler.getLevel().getEntityManager().addEmitter(new ParticleEmitter(
+							20, 0f, brownColor,
+							Handler.getLevel().getEntityManager().getPlayer().getX() + 32,
+							y + 16, 3, 3, 20, 25, 190, 350, 1, 1.5f));
+				}
 				y = Handler.getLevel().getGroundLevel();
 				height = (int) (entity.getY() - Handler.getLevel().getGroundLevel() + OFFSET);
+			}else{
+				floorTimer += delta;
+				if(floorTimer > floorTime){					
+					hitFloor = false;
+				}
 			}
 			doDraw = true;
 		}else if(doDraw){

@@ -15,11 +15,12 @@ public class ParticleEmitter {
 	private int amount, generated;
 	private float rate, timer = 0f;
 	private int particleWidth, particleHeight;
-	private int minSpeed, maxSpeed, minAngle, maxAngle, minLife, maxLife;
+	private int minSpeed, maxSpeed, minAngle, maxAngle;
+	private float minLife, maxLife;
 
 	public ParticleEmitter(int amount, float rate, Color color, float x, float y,
 			int particleWidth, int particleHeight, int minSpeed, int maxSpeed,
-			int minAngle, int maxAngle, int minLife, int maxLife) {
+			int minAngle, int maxAngle, float minLife, float maxLife) {
 		this.amount = amount;
 		this.rate = rate;
 		this.color = color;
@@ -70,7 +71,7 @@ public class ParticleEmitter {
 		int speed = MathUtils.random(minSpeed, maxSpeed);
 		float angleX = speed * MathUtils.cos(angleR);
 		float angleY = -speed * MathUtils.sin(angleR);
-		int particleMaxLife = MathUtils.random(minLife, maxLife);
+		float particleMaxLife = MathUtils.random(minLife, maxLife);
 		particles.add(new Particle(x, y, particleWidth, particleHeight, angleX, angleY, particleMaxLife));
 		generated++;
 	}

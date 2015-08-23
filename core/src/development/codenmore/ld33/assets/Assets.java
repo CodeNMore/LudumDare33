@@ -66,6 +66,10 @@ public class Assets {
 		return ret;
 	}
 	
+	public static BitmapFont getFont(){
+		return font;
+	}
+	
 	public static void setFontMicro(){
 		font.getData().setScale(1.8f);
 	}
