@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 
 import development.codenmore.ld33.assets.Assets;
+import development.codenmore.ld33.console.Console;
 
 public class InputManager implements InputProcessor {
 	
@@ -37,7 +38,7 @@ public class InputManager implements InputProcessor {
 		if(keycode >= keysDown.length)
 			return false;
 		keysDown[keycode] = false;
-		if(keycode == Keys.M){
+		if(!Console.show && keycode == Keys.M){
 			if(Assets.getMusic().isPlaying())
 				Assets.getMusic().stop();
 			else
@@ -48,6 +49,7 @@ public class InputManager implements InputProcessor {
 
 	@Override
 	public boolean keyTyped(char character) {
+		Console.typed(character);
 		return false;
 	}
 

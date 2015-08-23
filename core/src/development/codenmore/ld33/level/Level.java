@@ -33,20 +33,6 @@ public class Level {
 				0, Tile.TILESIZE * height, Main.WIDTH,
 				Main.HEIGHT - Tile.TILESIZE * height, 14.0f);
 		genLevel(biome);// 0-grass 1-desert 2-industrial
-
-//		addBuilding(new Pub(400, getGroundLevel()));
-//		addBuilding(new House(300, getGroundLevel()));
-//		addBuilding(new TallBuilding(200, getGroundLevel()));
-//		addBuilding(new Barn(100, getGroundLevel()));
-//
-//		new Turret(entityManager, 170, getGroundLevel(), 5.0f);
-//		
-//		for(int i = 0;i < 4;++i){
-//			new Cow(entityManager, 270, getGroundLevel());
-//			new Human(entityManager, 270, getGroundLevel(), false);
-//		}
-//		
-//		new Rock(entityManager, 270, getGroundLevel());
 	}
 
 	public void tick(float delta) {

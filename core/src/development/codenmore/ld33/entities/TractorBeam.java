@@ -96,5 +96,9 @@ public class TractorBeam {
 	public float getTimer(){
 		return timer;
 	}
+	
+	public void setTimer(float timer){
+		this.timer = timer;
+	}
 
 }

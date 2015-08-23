@@ -9,9 +9,10 @@ import development.codenmore.ld33.entities.TractorBeam;
 
 public class HUD {
 	
-	private static final float STARTHEALTH = 3f;
+	public static final float STARTHEALTH = 3f;
 	private float health = 3f;
 	private int quotaFill = 0, requiredQuota = 7;
+	private boolean endless = false;
 	private FillBar energyBar;
 	private FillBar healthBar;
 	private FillBar quotaBar;
@@ -23,6 +24,9 @@ public class HUD {
 	}
 	
 	public void tick(float delta){
+		if(endless){
+			Handler.getLevel().getEntityManager().getPlayer().getBeam().setTimer(0);
+		}
 		energyBar.setFill(energyBar.getMaxFill() 
 				-Handler.getLevel().getEntityManager().getPlayer().getBeam().getTimer());
 		if(energyBar.getFill() < 0)
@@ -65,6 +69,8 @@ public class HUD {
 	
 	public void damage(float i){
 		Assets.getSound("hurt").play();
+		if(endless)
+			return;
 		health -= i;
 		if(health <= 0){
 			health = 0;
@@ -80,6 +86,10 @@ public class HUD {
 		else if(quotaFill >= requiredQuota){
 			Handler.getLevel().getGameState().getDay().endNight(true, false);
 		}
+	}
+	
+	public void setEndless(){
+		endless = true;
 	}
 	
 	//GETTERS SETTERS
@@ -108,6 +118,14 @@ public class HUD {
 		this.requiredQuota = requiredQuota;
 		quotaBar.setMaxFill(requiredQuota);
 		setQuotaFill(0);
+	}
+
+	public boolean isEndless() {
+		return endless;
+	}
+
+	public void setEndless(boolean endless) {
+		this.endless = endless;
 	}
 
 }

@@ -4,3 +4,5 @@ This game was created for the Ludum Dare competition, #33, using LibGDX and Java
 ### License
 Copyright (c) CodeNMore 2015 - All Rights Reserved
 Source code and/or assets for this project may be used and modified ONLY for personal use, and may NOT be distributed or re-distributed (as-is or modified) for free OR for profit, unless permission is granted to the distributer specifically by CodeNMore.
+### Use of Code
+Use this code at your own risk; it was created in under 48 hours and may contain bugs!

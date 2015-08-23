@@ -5,7 +5,7 @@
 	"quota": 8,
 	"maxCows": 4,
 	"maxHumans": 6,
-	"humanShooterChance": 0.8,
+	"humanShooterChance": 0.75,
 	"minCowTime": 4,
 	"maxCowTime": 8.5,
 	"minHumanTime": 2.5,

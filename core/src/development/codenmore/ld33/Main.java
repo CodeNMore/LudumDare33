@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import development.codenmore.ld33.assets.Assets;
+import development.codenmore.ld33.console.Console;
 import development.codenmore.ld33.input.InputManager;
 import development.codenmore.ld33.states.LoadingState;
 import development.codenmore.ld33.states.State;
@@ -52,8 +53,14 @@ public class Main extends ApplicationAdapter {
 		fpsLogger.log();
 		//Render
 		if(State.peekState() != null){
-			State.peekState().tick(Gdx.graphics.getDeltaTime());
+			if(!Console.show)
+				State.peekState().tick(Gdx.graphics.getDeltaTime());
 			State.peekState().render(batch);
+		}
+		//CONSOLE
+		if(Assets.isLoaded()){
+			Console.tick(Gdx.graphics.getDeltaTime());
+			Console.render(batch);
 		}
 	}
 	

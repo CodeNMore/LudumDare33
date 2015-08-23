@@ -21,6 +21,7 @@ public class Assets {
 	private static ObjectMap<String, Sound> sounds = new ObjectMap<String, Sound>();
 	private static BitmapFont font;
 	private static TextureAtlas atlas;
+	private static boolean loaded = false;
 	private static Music music;
 	
 	private Assets(){}
@@ -43,6 +44,8 @@ public class Assets {
 			sounds.put(file, manager.get("sounds/" + file + ".wav", Sound.class));
 		}
 		music = manager.get("music/music.wav", Music.class);
+		
+		loaded = true;
 	}
 	
 	public static Sound getSound(String name){
@@ -61,6 +64,10 @@ public class Assets {
 		for(int i = 1;i <= end;++i)
 			ret[i - 1] = getRegion(name + i);
 		return ret;
+	}
+	
+	public static void setFontMicro(){
+		font.getData().setScale(1.8f);
 	}
 	
 	public static void setFontSmall(){
@@ -97,6 +104,10 @@ public class Assets {
 
 	public static Music getMusic() {
 		return music;
+	}
+
+	public static boolean isLoaded() {
+		return loaded;
 	}
 
 }

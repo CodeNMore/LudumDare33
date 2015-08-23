@@ -53,10 +53,11 @@ public class Entity {
 		HumanShooterComponent hsc = getComponent(HumanShooterComponent.ID);
 		MovementComponent mc = getComponent(MovementComponent.ID);
 		if(hsc != null && mc != null){
-			if(mc.getX() < 0)
+			if(mc.getX() < 0){
 				batch.draw(Assets.getRegion("gun.left"), x - 3, y + 10, 6, 6);
-			else
+			}else{
 				batch.draw(Assets.getRegion("gun.right"), x + 8, y + 10, 6, 6);
+			}
 		}
 	}
 	

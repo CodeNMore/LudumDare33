@@ -66,4 +66,12 @@ public class Background {
 		batch.draw(nightCycle.getTexture(), x, y + position - height, width, height);
 	}
 
+	public float getNightTime() {
+		return nightTime;
+	}
+
+	public void setNightTime(float nightTime) {
+		this.nightTime = nightTime;
+	}
+
 }

@@ -7,7 +7,7 @@ Chosen Idea: Codename: "Saucer"
 	TODO:
 	- ***Game stops when daytime occurs
 		- Every night it gets harder
-		- Must eliminate all humans (10 nights?)
+		- Must eliminate all humans (7 nights?)
 	- ***Soldiers trying to destroy ship
 	- **Pick up objects with beam and drop them
 	- **Show health by lights on saucer

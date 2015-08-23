@@ -153,6 +153,10 @@ public class Player extends Entity {
 			hud.incQuota(i);
 	}
 	
+	public void fillHealth(){
+		hud.setHealth(HUD.STARTHEALTH);
+	}
+	
 	@Override
 	public void checkBounds(){
 		if(x < 0){
