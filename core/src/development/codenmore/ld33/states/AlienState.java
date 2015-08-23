@@ -24,17 +24,18 @@ public class AlienState extends State {
 	@Override
 	public void tick(float delta) {
 		if (Gdx.input.isKeyJustPressed(Keys.ENTER)) {
-			if(dayNumber == 8){
-				State.popAll();
-				State.pushState(new HomeState());
+			if (dayNumber == 8) {
+				 State.popState();
+				 State.pushState(new HomeState());
+				 return;
 			}
 			if (remaining > 0)
 				remaining--;
-			else if(remaining == 0){
+			else if (remaining == 0) {
 				dayNumber = 1;
 				remaining = -1;
 				State.pushState(new GameState(dayNumber));
-			}else{
+			} else {
 				State.pushState(new GameState(dayNumber));
 			}
 		}
@@ -56,53 +57,50 @@ public class AlienState extends State {
 							+ "              [ENTER]"), 190, 466);
 				} else {
 					Assets.drawString(batch, spacify("you must abduct\n"
-							+ "enough cows and\n"
-							+ "humans to meet\n"
-							+ "the nightly quota\n"
-							+ "if you dont meet\n"
-							+ "it in time, then\n"
-							+ "you will be fired\n"
+							+ "enough cows and\n" + "humans to meet\n"
+							+ "the nightly quota\n" + "if you dont meet\n"
+							+ "it in time, then\n" + "you will be fired\n"
 							+ "             [ENTER]"), 190, 466);
 				}
-			}else{
+			} else {
 				Assets.drawString(batch, spacify(what), 190, 466);
 			}
 		}
 		batch.end();
 	}
-	
-	public void reset(int type){
-		if(type == 1){//COMPLETED
+
+	@Override
+	public void onPop() {
+		background.dispose();
+	}
+
+	public void reset(int type) {
+		if (type == 1) {// COMPLETED
 			dayNumber++;
-			if(dayNumber == 8){//end of game
-				what = "Congratulations!\n"
-						+ "we eliminated\n"
-						+ "all humans and\n"
-						+ "cows! Thanks for\n"
-						+ "your help!";
-			}else{
-				what = "Alright, now day\n"
-						+ "number " + dayNumber + " because\n"
-						+ "you met your\n"
-						+ "quota!\n\n\n\n"
-						+ "             [ENTER]";
+			if (dayNumber == 8) {// end of game
+				what = "Congratulations!\n" + "we eliminated\n"
+						+ "all humans and\n" + "cows! Thanks for\n"
+						+ "your help!\n\n\n" + "             [ENTER]";
+			} else {
+				if (dayNumber != 7) {
+					what = "Alright, now day\n" + "number " + dayNumber
+							+ " because\n" + "you met your\n"
+							+ "quota!\n\n\n\n" + "             [ENTER]";
+				} else {
+					what = "Alright, now the\n" + "final day! Time\n"
+							+ "to abduct all\n" + "of the earth!\n\n\n\n"
+							+ "             [ENTER]";
+				}
 			}
-		}else if(type == 2){//DEAD
-			what = "How could you\n"
-					+ "die that easy?\n"
-					+ "You had one job!\n"
-					+ "I'll go back in\n"
-					+ "time and let you\n"
-					+ "do it again!\n\n"
+		} else if (type == 2) {// DEAD
+			what = "How could you\n" + "die that easy?\n"
+					+ "You had one job!\n" + "I'll go back in\n"
+					+ "time and let you\n" + "do it again!\n\n"
 					+ "             [ENTER]";
-		}else{//NO QUOTA
-			what = "How could you\n"
-					+ "not meet your\n"
-					+ "quota?!?!?!?!\n"
-					+ "I'll go back in\n"
-					+ "time and let you\n"
-					+ "do it again!\n\n"
-					+ "             [ENTER]";
+		} else {// NO QUOTA
+			what = "How could you\n" + "not meet your\n" + "quota?!?!?!?!\n"
+					+ "I'll go back in\n" + "time and let you\n"
+					+ "do it again!\n\n" + "             [ENTER]";
 		}
 	}
 

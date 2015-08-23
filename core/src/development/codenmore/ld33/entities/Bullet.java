@@ -14,7 +14,7 @@ public class Bullet {
 	
 	//Info
 	private static TextureRegion texture = Assets.getRegion("color");
-	private static final float SPEED = 400f;
+	private static final float SPEED = 350f;
 	private float x, y, vx, vy;
 	
 	public Bullet(EntityManager manager, float x, float y, float vx, float vy){
@@ -23,6 +23,7 @@ public class Bullet {
 		this.vx = vx * SPEED;
 		this.vy = vy * SPEED;
 		
+		Assets.getSound("shoot").play();
 		manager.addBullet(this);
 	}
 	
@@ -36,7 +37,7 @@ public class Bullet {
 		Player player = Handler.getLevel().getEntityManager().getPlayer();
 		if(((CollisionComponent) player.getComponent(CollisionComponent.ID)).getBounds()
 				.overlaps(getBounds())){
-			player.damage(0.3f);
+			player.damage(0.165f);
 			return true;
 		}
 		

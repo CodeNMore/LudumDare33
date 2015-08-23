@@ -35,6 +35,8 @@ public class LoadingState extends State {
 		if(done && timer >= MINTIME){
 			State.popState();
 			State.pushState(new HomeState());
+			Assets.getMusic().play();
+			Assets.getMusic().setLooping(true);
 		}
 	}
 

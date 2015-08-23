@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 
+import development.codenmore.ld33.assets.Assets;
+
 public class InputManager implements InputProcessor {
 	
 	private static boolean[] keysDown = new boolean[256];
@@ -35,6 +37,12 @@ public class InputManager implements InputProcessor {
 		if(keycode >= keysDown.length)
 			return false;
 		keysDown[keycode] = false;
+		if(keycode == Keys.M){
+			if(Assets.getMusic().isPlaying())
+				Assets.getMusic().stop();
+			else
+				Assets.getMusic().play();
+		}
 		return true;
 	}
 

@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 
+import development.codenmore.ld33.assets.Assets;
 import development.codenmore.ld33.level.Level;
 import development.codenmore.ld33.particles.ParticleEmitter;
 
@@ -47,6 +48,8 @@ public class EntityManager {
 				level.getGameState().getDay().incCowCount(-1);
 			}else if(e instanceof Human){
 				level.getGameState().getDay().incHumanCount(-1);
+			}else{
+				Assets.getSound("destroy").play();
 			}
 			entities.removeValue(e, true);
 		}

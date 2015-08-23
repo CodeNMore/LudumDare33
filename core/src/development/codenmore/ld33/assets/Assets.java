@@ -1,6 +1,8 @@
 package development.codenmore.ld33.assets;
 
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -10,22 +12,41 @@ import com.badlogic.gdx.utils.ObjectMap;
 
 public class Assets {
 	
+	private static String[] soundPaths = {
+		"hurt", "shoot", "destroy", "collect"
+	};
+	
 	private static AssetManager manager = new AssetManager();
 	private static ObjectMap<String, TextureRegion> regions = new ObjectMap<String, TextureRegion>();
+	private static ObjectMap<String, Sound> sounds = new ObjectMap<String, Sound>();
 	private static BitmapFont font;
 	private static TextureAtlas atlas;
+	private static Music music;
 	
 	private Assets(){}
 	
 	public static void init(){
 		manager.load("font/font.fnt", BitmapFont.class);
 		manager.load("textures/atlas.pack", TextureAtlas.class);
+		
+		for(String file : soundPaths){
+			manager.load("sounds/" + file + ".wav", Sound.class);
+		}
+		manager.load("music/music.wav", Music.class);
 	}
 	
 	public static void postInit(){
 		font = manager.get("font/font.fnt");
 		font.getData().setLineHeight(8.5f);
 		atlas = manager.get("textures/atlas.pack", TextureAtlas.class);
+		for(String file : soundPaths){
+			sounds.put(file, manager.get("sounds/" + file + ".wav", Sound.class));
+		}
+		music = manager.get("music/music.wav", Music.class);
+	}
+	
+	public static Sound getSound(String name){
+		return sounds.get(name);
 	}
 	
 	public static TextureRegion getRegion(String name){
@@ -72,6 +93,10 @@ public class Assets {
 	
 	public static int getProgress(){
 		return (int) (manager.getProgress() * 100);
+	}
+
+	public static Music getMusic() {
+		return music;
 	}
 
 }

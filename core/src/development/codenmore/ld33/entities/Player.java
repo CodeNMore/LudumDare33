@@ -149,7 +149,8 @@ public class Player extends Entity {
 	}
 	
 	public void incQuota(int i){
-		hud.incQuota(i);
+		if(hud.getQuotaFill() < hud.getRequiredQuota())
+			hud.incQuota(i);
 	}
 	
 	@Override

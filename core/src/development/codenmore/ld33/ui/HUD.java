@@ -64,6 +64,7 @@ public class HUD {
 	}
 	
 	public void damage(float i){
+		Assets.getSound("hurt").play();
 		health -= i;
 		if(health <= 0){
 			health = 0;
@@ -72,6 +73,7 @@ public class HUD {
 	}
 	
 	public void incQuota(int i){
+		Assets.getSound("collect").play();
 		quotaFill += i;
 		if(quotaFill < 0)
 			quotaFill = 0;
